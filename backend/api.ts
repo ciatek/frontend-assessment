@@ -28,7 +28,9 @@ export const getCurrentList = async (): Promise<Item[]> => {
   return JSON.parse(localStorage.getItem("currentList") || "[]");
 }
 
-export const setCurrentList = async (list: Item[]): Promise<void> => {
+export const setCurrentList = async (item: Item): Promise<void> => {
   await new Promise(resolve => setTimeout(resolve, 100));
-  localStorage.setItem("currentList", JSON.stringify(list));
+  const currentList = JSON.parse(localStorage.getItem("currentList") || "[]");
+  const updatedList = [...currentList, item];
+  localStorage.setItem("currentList", JSON.stringify(updatedList));
 }
